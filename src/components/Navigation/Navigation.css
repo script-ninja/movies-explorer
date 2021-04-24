@@ -1,1 +1,7 @@
-.navigation {}
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-left: 44px;
+  width: 100%;
+}

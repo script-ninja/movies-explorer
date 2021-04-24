@@ -12,13 +12,17 @@
   font-weight: 400;
   font-style: normal;
   font-size: 14px;
+  line-height: 18px;
   color: #ffffff;
 }
 
 .root {
+  display: flex;
+  flex-direction: column;
   margin: auto;
   padding: 0 40px;
   max-width: 1280px;
+  min-height: 100vh;
 }
 
 /* body {
