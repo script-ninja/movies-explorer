@@ -1,0 +1,70 @@
+.project {
+  padding: 110px 70px;
+}
+
+.project__title {
+  margin: 0;
+  padding: 0 0 22px;
+  border-bottom: 1px solid #dadada;
+
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 26px;
+}
+
+.project__grid {
+  margin: 70px 0 110px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 40px;
+  grid-row-gap: 26px;
+}
+
+.project__grid-title {
+  margin: 0;
+
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.project__grid-text {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.project__deadline {
+  margin: 0;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.project__deadline_width_small {
+  width: 20%;
+}
+
+.project__deadline_width_big {
+  width: 80%;
+}
+
+.project__deadline-duration {
+  margin: 0;
+  padding: 9px 14px;
+  background-color: #303030;
+  text-align: center;
+}
+
+.project__deadline-duration_bg_green {
+  background-color: #3DDC84;
+  color: #000000;
+}
+
+.project__deadline-title {
+  margin: 0;
+  padding: 14px;
+  color: #8b8b8b;
+  text-align: center;
+}

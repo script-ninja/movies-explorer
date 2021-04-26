@@ -1,10 +1,9 @@
 import './Main.css';
-import Preloader from '../Preloader/Preloader';
 
-export default function Main() {
+export default function Main(props) {
   return (
     <section className="main">
-      <Preloader />
+      { props.children }
     </section>
   );
 }
