@@ -4,7 +4,7 @@ import logo from '../../images/logo.svg';
 
 export default function Logo() {
   return (
-    <NavLink to='/' title='На главную' replace>
+    <NavLink to='/' title='На главную'>
       <img className="logo" src={ logo } alt="Logo" />
     </NavLink>
   );

@@ -112,7 +112,7 @@
 .aboutme__portfolio-link::after {
   content: '↗';
   position: absolute;
-  top: 1em;
+  top: calc(50% - 10px);
   right: 0;
 
   line-height: 1em;

@@ -6,12 +6,13 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Landing from '../Landing/Landing';
+import Movies from '../Movies/Movies';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({
     _id: null,
-    name: 'Username',
-    email: 'email@email.box',
+    name: '',
+    email: '',
     authorized: true,
   });
 
@@ -29,7 +30,7 @@ function App() {
           </Route>
           <Route path='/movies'>
             <Header />
-            <Main></Main>
+            <Movies />
             <Footer />
           </Route>
           <Route path='/saved-movies'>

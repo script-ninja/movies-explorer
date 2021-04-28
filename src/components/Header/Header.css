@@ -36,11 +36,11 @@
 }
 
 .header__link_space-between_small:not(:last-child) {
-  padding-right: 16px;
+  margin-right: 16px;
 }
 
 .header__link_space-between_big:not(:last-child) {
-  padding-right: 30px;
+  margin-right: 30px;
 }
 
 .header__link_style_button {

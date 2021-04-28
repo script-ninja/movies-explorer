@@ -13,7 +13,6 @@ export default function Header() {
       <NavLink
         className="header__link header__link_space-between_big"
         to='/signup'
-        replace
       >
         Регистрация
       </NavLink>
@@ -21,7 +20,6 @@ export default function Header() {
       <NavLink
         className="header__link header__link_space-between_big header__link_style_button"
         to='/signin'
-        replace
       >
         Войти
       </NavLink>
@@ -34,7 +32,6 @@ export default function Header() {
         className='header__link header__link_space-between_small'
         activeClassName='header__link_active'
         to='/movies'
-        replace
       >
         Фильмы
       </NavLink>
@@ -43,7 +40,6 @@ export default function Header() {
         className='header__link header__link_space-between_small'
         activeClassName='header__link_active'
         to='/saved-movies'
-        replace
       >
         Сохраненные фильмы
       </NavLink>
@@ -52,7 +48,6 @@ export default function Header() {
         className='header__link header__link_space-between_small header__link_style_profile'
         activeClassName='header__link_active-profile'
         to='/profile'
-        replace
       >
         Аккаунт
       </NavLink>

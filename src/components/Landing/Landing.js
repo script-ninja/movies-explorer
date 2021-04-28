@@ -7,12 +7,12 @@ import AboutMe from './AboutMe/AboutMe';
 
 
 export default function Landing() {
-  return (<>
+  return (
     <Main>
       <Promo />
       <Project />
       <Techs />
       <AboutMe />
     </Main>
-  </>);
+  );
 }
