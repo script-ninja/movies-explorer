@@ -37,26 +37,26 @@
   box-sizing: border-box;
   display: inline-block;
 
-  width: 34px;
-  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
   border: 1px solid #424242;
   border-radius: 50%;
 
-  background-image: url('../../../images/search-icon.svg');
+  background-image: url('../../images/search-icon.svg');
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .search__button {
   padding: 0;
-  width: 34px;
-  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
   border: none;
   border-radius: 50%;
 
   background-color: #4285F4;
-  background-image: url('../../../images/search-arrow.svg');
-  background-position: center;
+  background-image: url('../../images/search-arrow.svg');
+  background-position: 15px center;
   background-repeat: no-repeat;
 }
 
