@@ -21,7 +21,7 @@ export default function MovieCard({ movie }) {
         <img className='moviecard__image' src={ movie.image } alt={ movie.nameRU }/>
       </a>
       <figcaption className='moviecard__caption'>
-        <h2 className='moviecard__title'>{ movie.nameRU }</h2>
+        <h2 className='moviecard__title' title={ movie.nameRU }>{ movie.nameRU }</h2>
         <p className='moviecard__duration'>{ stringifyDuration(movie.duration) }</p>
       </figcaption>
       {
