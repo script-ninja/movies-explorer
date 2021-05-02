@@ -7,6 +7,7 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Landing from '../Landing/Landing';
 import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({
@@ -35,7 +36,7 @@ function App() {
           </Route>
           <Route path='/saved-movies'>
             <Header />
-            <Main></Main>
+            <SavedMovies />
             <Footer />
           </Route>
           <Route path='/profile'>

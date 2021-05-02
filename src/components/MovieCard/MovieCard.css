@@ -117,8 +117,8 @@
   border-radius: 30px;
   box-shadow: 0 0 2px 0 #000000;
 
-  background-color: #EE3465;
-  background-image: url('../../images/moviecard-added.svg');
+  background-color: #313131;
+  background-image: url('../../images/moviecard-x.svg');
   background-position: center;
   background-repeat: no-repeat;
 
@@ -131,8 +131,14 @@
   opacity: 0;
 }
 
+.moviecard__deletebutton_checked {
+  background-color: #EE3465;
+  background-image: url('../../images/moviecard-added.svg');
+}
+
 .moviecard__deletebutton:focus,
 .moviecard:hover .moviecard__deletebutton {
+  opacity: 1;
   background-color: #313131;
   background-image: url('../../images/moviecard-x.svg');
 }

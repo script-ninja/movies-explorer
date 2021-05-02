@@ -2,7 +2,7 @@ import React from 'react';
 import './MovieCard.css';
 import CurrentUserContext from '../../contexts/CurrentUser';
 
-export default function MovieCard({ movie }) {
+export default function MovieCard({ movie, hiddenDeleteButton }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   function stringifyDuration(duration) {
@@ -26,7 +26,7 @@ export default function MovieCard({ movie }) {
       </figcaption>
       {
         (movie.owner === currentUser._id)
-          ? <button className='moviecard__deletebutton' type='button'></button>
+          ? <button className={`moviecard__deletebutton ${hiddenDeleteButton ? 'moviecard__deletebutton_hidden' : 'moviecard__deletebutton_checked'}`} type='button'></button>
           : <button className='moviecard__savebutton' type='button'>Сохранить</button>
       }
     </figure>
