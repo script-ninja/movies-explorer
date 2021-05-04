@@ -10,6 +10,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Page404 from '../Page404/Page404';
 
 // fake data
 import user from '../../data/user';
@@ -52,7 +53,9 @@ export default function App() {
           <Header />
           <Profile onLogout={logout} />
         </Route>
-        <Route path='*'></Route>
+        <Route path='*'>
+          <Page404 />
+        </Route>
       </Switch>
     </CurrentUserContext.Provider>
   );
