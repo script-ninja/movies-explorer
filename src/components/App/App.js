@@ -9,6 +9,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
+import Login from '../Login/Login';
 
 // fake data
 import user from '../../data/user';
@@ -25,7 +26,9 @@ export default function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
-        <Route path='/signin'></Route>
+        <Route path='/signin'>
+          <Login />
+        </Route>
         <Route path='/signup'>
           <Register />
         </Route>

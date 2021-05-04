@@ -5,7 +5,10 @@
   font-size: 10px;
   line-height: 12px;
   color: #8B8B8B;
+}
 
+.forminput:not(:first-child) {
+  margin-top: 10px;
 }
 
 .forminput__field {
