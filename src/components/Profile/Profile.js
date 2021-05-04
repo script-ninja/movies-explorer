@@ -1,9 +1,9 @@
+import './Profile.css';
 import React from 'react';
 import CurrentUserContext from '../../contexts/CurrentUser';
-import './Profile.css';
 import Main from '../Main/Main';
 
-export default function Profile() {
+export default function Profile({ onLogout }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const [name, setName] = React.useState(currentUser.name);
@@ -18,11 +18,15 @@ export default function Profile() {
   }
 
   function onFocus(event) {
-    event.currentTarget.querySelector('.profile__label_border-bottom_gray').classList.add('profile__label_border-bottom_green');
+    event.currentTarget
+      .querySelector('.profile__label_border-bottom_gray')
+      .classList.add('profile__label_border-bottom_green');
   }
 
   function onBlur(event) {
-    event.currentTarget.querySelector('.profile__label_border-bottom_gray').classList.remove('profile__label_border-bottom_green');
+    event.currentTarget
+      .querySelector('.profile__label_border-bottom_gray')
+      .classList.remove('profile__label_border-bottom_green');
   }
 
   return (
@@ -31,15 +35,28 @@ export default function Profile() {
       <form className='profile__form' onFocus={onFocus} onBlur={onBlur}>
         <label className='profile__label profile__label_border-bottom_gray'>
           <p className='profile__label-text'>Имя</p>
-          <input className='profile__input' type='text' value={name} onChange={handleNameChange} placeholder='Ваше имя' />
+          <input className='profile__input'
+            type='text'
+            value={name}
+            onChange={handleNameChange}
+            placeholder='Ваше имя'
+          />
         </label>
         <label className='profile__label'>
         <p className='profile__label-text'>E-mail</p>
-          <input className='profile__input' type='email' value={email} onChange={handleEmailChange} placeholder='E-mail адрес' />
+          <input className='profile__input'
+            type='email'
+            value={email}
+            onChange={handleEmailChange}
+            placeholder='E-mail адрес'
+          />
         </label>
         <button className='profile__button profile__button_type_submit' type='submit'>Редактировать</button>
       </form>
-      <button className='profile__button profile__button_type_signout' type='button'>Выйти из аккаунта</button>
+      <button className='profile__button profile__button_type_signout'
+        onClick={onLogout} type='button'>
+          Выйти из аккаунта
+      </button>
     </Main>
   );
 }

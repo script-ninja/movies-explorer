@@ -1,58 +1,27 @@
+import './Movies.css';
 import Main from '../Main/Main';
 import SearchForm from '../SearchForm/SearchForm';
 import MovieCardsList from '../MovieCardsList/MovieCardsList';
 import MovieCard from '../MovieCard/MovieCard';
 import MoreButton from '../MoreButton/MoreButton';
 
+// fake movies
+import moviesArray from '../../data/movies';
+
 export default function Movies() {
   return (
     <Main className='main_sideindent_big'>
       <SearchForm />
       <MovieCardsList>
-        <MovieCard movie={{
-          nameRU: '33 слова о дизайне',
-          duration: '1980',
-          image: 'https://img.youtube.com/vi/__2oZSM1l1Q/hqdefault.jpg',
-          trailer: 'https://www.youtube.com/watch?v=__2oZSM1l1Q',
-          owner: 0
-        }} />
-        <MovieCard movie={{
-          nameRU: 'Киноальманах "100 лет дизайна"',
-          duration: '6480',
-          image: 'https://img.youtube.com/vi/clVPhymVdD8/hqdefault.jpg',
-          trailer: 'https://www.youtube.com/watch?v=eW8Noh_pLSQ',
-          owner: null
-        }} />
-        <MovieCard movie={{
-          nameRU: '33 слова о дизайне',
-          duration: '1980',
-          image: 'https://img.youtube.com/vi/__2oZSM1l1Q/hqdefault.jpg',
-          trailer: 'https://www.youtube.com/watch?v=__2oZSM1l1Q',
-          owner: 0
-        }} />
-        <MovieCard movie={{
-          nameRU: 'Gimme Danger: История Игги и The Stooges',
-          duration: '1980',
-          image: 'https://img.youtube.com/vi/__2oZSM1l1Q/hqdefault.jpg',
-          trailer: 'https://www.youtube.com/watch?v=__2oZSM1l1Q',
-          owner: null
-        }} />
-        <MovieCard movie={{
-          nameRU: 'Киноальманах "100 лет дизайна"',
-          duration: '6480',
-          image: 'https://img.youtube.com/vi/clVPhymVdD8/hqdefault.jpg',
-          trailer: 'https://www.youtube.com/watch?v=eW8Noh_pLSQ',
-          owner: 0
-        }} />
-        <MovieCard movie={{
-          nameRU: '33 слова о дизайне',
-          duration: '1980',
-          image: 'https://img.youtube.com/vi/__2oZSM1l1Q/hqdefault.jpg',
-          trailer: 'https://www.youtube.com/watch?v=__2oZSM1l1Q',
-          owner: null
-        }} />
+        {
+          (moviesArray.length)
+            ? moviesArray.map(movie => (<MovieCard key={movie._id} movie={movie} />))
+            : <h2 className='movies-message'>Фильмов не найдено</h2>
+        }
       </MovieCardsList>
-      <MoreButton />
+      {
+        (moviesArray.length > 3 && <MoreButton />)
+      }
     </Main>
   );
 }

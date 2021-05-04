@@ -58,11 +58,14 @@
   background-image: url('../../images/search-arrow.svg');
   background-position: 15px center;
   background-repeat: no-repeat;
+
+  cursor: pointer;
+
+  transition: all 0.1s ease;
 }
 
 .search__button:hover {
   opacity: 0.7;
-  cursor: pointer;
 }
 
 .search__filters {

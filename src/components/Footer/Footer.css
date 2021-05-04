@@ -36,6 +36,8 @@
 .footer__link {
   color: #ffffff;
   text-decoration: none;
+
+  transition: all 0.1s ease;
 }
 
 .footer__link:hover {
