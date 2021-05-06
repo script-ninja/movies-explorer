@@ -117,3 +117,34 @@
 
   line-height: 1em;
 }
+
+@media screen and (max-width: 768px) {
+  .aboutme {
+    padding: 90px 50px;
+  }
+
+  .aboutme__photo {
+    max-width: 255px;
+  }
+
+  .aboutme__name {
+    margin-bottom: 16px;
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .aboutme__status {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .aboutme__story {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .aboutme__portfolio-link {
+    font-size: 28px;
+  }
+}

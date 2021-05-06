@@ -6,3 +6,10 @@
   padding-left: 70px;
   padding-right: 70px;
 }
+
+@media screen and (max-width: 768px) {
+  .main_sideindent_big {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}

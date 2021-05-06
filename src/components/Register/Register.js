@@ -11,7 +11,7 @@ export default function Register() {
       <Logo />
       <h2 className='register__title'>Добро пожаловать!</h2>
       <form className='register__form'>
-        <FormInput label='Имя' type='text' placeholder='Укажите ваше имя' minlength='2' maxlength='30' required />
+        <FormInput label='Имя' type='text' placeholder='Укажите ваше имя' minLength='2' maxLength='30' required />
         <FormInput label='E-mail' type='email' placeholder='Укажите ваш e-mail' required />
         <FormInput label='Пароль' type='password' placeholder='Придумайте пароль' required />
         <p className='register__message'>Что-то пошло не так ...</p>
