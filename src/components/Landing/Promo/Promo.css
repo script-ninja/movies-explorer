@@ -1,5 +1,5 @@
 .promo {
-  margin: 0 40px;
+  margin: 20px 40px 0;
   border-radius: 10px;
 
   background-color: #272727;
@@ -51,11 +51,35 @@
 
 @media screen and (max-width: 768px) {
   .promo {
-    margin: 0 20px;
+    margin: 20px 20px 0;
   }
 
   .promo__title {
-    font-size: 40px;
-    line-height: 52px;
+    background-size: calc(220px + (340 - 220) * (100vw - 320px) / (768 - 320)) auto;
+    font-size: calc(29px + (40 - 29) * (100vw - 320px) / (768 - 320));
+    line-height: calc(37px + (52 - 37) * (100vw - 320px) / (768 - 320));
+  }
+
+  .promo__nav {
+    padding-bottom: calc(17px + (30 - 17) * (100vw - 320px) / (768 - 320));
+  }
+
+  .promo__link {
+    padding: calc(5px + (10 - 5) * (100vw - 320px) / (768 - 320)) calc(15px + (17 - 15) * (100vw - 320px) / (768 - 320));
+    font-size: calc(10px + (12 - 10) * (100vw - 320px) / (768 - 320));
+  }
+
+  .promo__link:not(:last-child) {
+    margin-right: calc(5px + (10 - 5) * (100vw - 320px) / (768 - 320));
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .promo {
+    margin: 14px 14px 0;
+  }
+
+  .promo__link {
+    border-radius: 6px;
   }
 }

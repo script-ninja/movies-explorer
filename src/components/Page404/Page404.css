@@ -46,3 +46,25 @@
 .page404__button:hover {
   opacity: 0.7;
 }
+
+@media screen and (max-width: 320px) {
+  .page404 {
+    padding: 0 0 30px;
+    max-height: 100%;
+  }
+
+  .page404__title {
+    font-size: 80px;
+    line-height: 96px;
+  }
+
+  .page404__text {
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .page404__button {
+    font-size: 12px;
+    line-height: 14px;
+  }
+}

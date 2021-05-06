@@ -74,3 +74,20 @@
   align-items: center;
   padding: 30px 0;
 }
+
+@media screen and (max-width: 320px) {
+  .search__label {
+    display: none;
+  }
+
+  .search__input {
+    padding-left: 0;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: left;
+  }
+
+  .search__filters {
+    padding: 40px 0;
+  }
+}

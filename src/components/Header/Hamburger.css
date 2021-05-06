@@ -163,4 +163,15 @@
   .hamburger {
     display: block;
   }
+
+  .hamburger__menu {
+    width: calc(320px + (520 - 320) * (100vw - 320px) / (768 - 320));
+  }
 }
+
+@media screen and (max-width: 320px) {
+  .hamburger__menu {
+    padding: 145px 0 45px;
+  }
+}
+

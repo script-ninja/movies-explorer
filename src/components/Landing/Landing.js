@@ -8,7 +8,7 @@ import AboutMe from './AboutMe/AboutMe';
 
 export default function Landing() {
   return (
-    <Main>
+    <Main className='landing'>
       <Promo />
       <Project />
       <Techs />

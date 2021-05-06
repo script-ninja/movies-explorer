@@ -120,7 +120,7 @@
 
 @media screen and (max-width: 768px) {
   .aboutme {
-    padding: 90px 50px;
+    padding: calc(70px + (90 - 70) * (100vw - 320px) / (768 - 320)) calc(14px + (50 - 14) * (100vw - 320px) / (768 - 320));
   }
 
   .aboutme__photo {
@@ -145,6 +145,41 @@
   }
 
   .aboutme__portfolio-link {
-    font-size: 28px;
+    font-size: calc(17px + (28 - 17) * (100vw - 320px) / (768 - 320));
+    line-height: calc(28px + (50 - 28) * (100vw - 320px) / (768 - 320));
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .aboutme__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .aboutme__photo {
+    margin: 60px 0 40px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .aboutme__name {
+    margin-bottom: 20px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .aboutme__story {
+    margin-bottom: 40px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .aboutme__list {
+    margin-bottom: 70px;
+  }
+
+  .aboutme__caption {
+    margin-bottom: 40px;
+    font-size: 14px;
   }
 }
