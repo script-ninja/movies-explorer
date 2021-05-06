@@ -2,10 +2,6 @@
 @import url('./vendor/fonts/fonts.css');
 
 :root {
-  /* Следующие два свойства небольшой хак для того, чтобы полоса прокрутки не смещала контент */
-  overflow-x: hidden;
-  margin-right: calc(-1 * (100vw - 100%));
-
   scroll-behavior: smooth;
 }
 

@@ -1,0 +1,166 @@
+.hamburger {
+  display: none;
+}
+
+.hamburger__burger {
+  z-index: 3;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 28px;
+  height: 22px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.hamburger__burger_rotate_45deg {
+  transform: rotate(45deg);
+}
+
+.hamburger__checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  display: block;
+  width: 28px;
+  height: 2px;
+  background-color: #ffffff;
+
+  cursor: pointer;
+
+  transition: all 0.5s ease;
+}
+
+.hamburger__checkbox::before,
+.hamburger__checkbox::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.hamburger__checkbox::before {
+  top: 0;
+  left: 0;
+}
+
+.hamburger__checkbox::after {
+  bottom: 0;
+  left: 0;
+}
+
+.hamburger__checkbox:checked::before {
+  opacity: 0;
+}
+
+.hamburger__checkbox:checked::after {
+  bottom: calc(50% - 1px);
+  transform: rotate(90deg);
+}
+
+.hamburger__overlay {
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.3);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: all 0.2s ease;
+}
+
+.hamburger__overlay_visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hamburger__menu {
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 160px 0 90px;
+  width: 70%;
+  height: 100%;
+  background-color: #202020;
+
+  transform: translateX(100%);
+  transition: all 0.3s ease;
+}
+
+.hamburger__menu_visible {
+  transform: translateX(0);
+}
+
+.hamburger__link {
+  border-bottom: 1px solid transparent;
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+  text-decoration: none;
+
+  transition: all 0.1s ease;
+}
+
+.hamburger__link:not(:last-child) {
+  margin-bottom: 28px;
+}
+
+.hamburger__link_active {
+  border-bottom-color: #ffffff;
+  cursor: default;
+  pointer-events: none;
+}
+
+.hamburger__link:hover {
+  opacity: 0.7;
+}
+
+.hamburger__link_style_profile {
+  display: flex;
+  align-items: center;
+  padding: 5px 12px;
+  border: 2px solid #424242;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.hamburger__link_align_bottom {
+  margin-top: auto;
+}
+
+.hamburger__link_style_profile::before {
+  content: url('../../images/profile-icon.svg');
+  padding-right: 7px;
+  width: 12px;
+  height: 14px;
+}
+
+.hamburger__profile-link_active {
+  border-color: #3DDC84;
+  cursor: default;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+}

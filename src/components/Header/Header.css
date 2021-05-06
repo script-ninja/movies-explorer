@@ -8,12 +8,17 @@
   padding: 18px 70px;
 
   background-color: #202020;
-  filter: drop-shadow(0 8px 4px #202020);
 }
 
 .header__navigation {
   justify-content: flex-end;
   padding-left: 44px;
+}
+
+.header__links {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .header__link {
@@ -55,12 +60,15 @@
 .header__link_style_profile {
   display: flex;
   align-items: center;
-  margin-left: auto;
   padding: 5px 12px;
   border: 2px solid #424242;
   border-radius: 50px;
   font-weight: 500;
   font-size: 14px;
+}
+
+.header__link_align_right {
+  margin-left: auto;
 }
 
 .header__link_style_profile::before {
@@ -74,4 +82,10 @@
   border-color: #3DDC84;
   cursor: default;
   pointer-events: none;
+}
+
+@media screen and (max-width: 768px) {
+  .header__links {
+    display: none;
+  }
 }
