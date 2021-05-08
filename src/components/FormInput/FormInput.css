@@ -1,0 +1,37 @@
+.forminput {
+  display: block;
+
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #8B8B8B;
+}
+
+.forminput:not(:first-child) {
+  margin-top: 10px;
+}
+
+.forminput__field {
+  box-sizing: border-box;
+  display: block;
+  margin: 10px 0;
+  padding: 15px;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  background-color: #2f2f2f;
+
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  color: #ffffff;
+
+  outline: none;
+
+  transition: all 0.1s ease;
+}
+
+.forminput__field:focus {
+  border-color: #3DDC84;
+}

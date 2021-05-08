@@ -1,0 +1,14 @@
+.moviecardslist {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-rows: auto;
+  grid-gap: 30px;
+  justify-content: center;
+  justify-items: center;
+}
+
+@media screen and (max-width: 320px) {
+  .moviecardslist {
+    grid-gap: 10px
+  }
+}

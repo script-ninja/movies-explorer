@@ -1,0 +1,21 @@
+.main {
+  padding: 20px 0 80px;
+}
+
+.main_sideindent_big {
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
+@media screen and (max-width: 768px) {
+  .main_sideindent_big {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .main_sideindent_big {
+    padding: 40px 10px 80px;
+  }
+}

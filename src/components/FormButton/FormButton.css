@@ -1,0 +1,31 @@
+.formbutton {
+  box-sizing: border-box;
+  display: block;
+  margin-top: auto;
+  padding: 15px;
+  width: 100%;
+  border: none;
+  border-radius: 3px;
+
+  background-color: #4285F4;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+
+  cursor: pointer;
+
+  transition: all 0.1s ease;
+}
+
+.formbutton:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 320px) {
+  .formbutton {
+    font-size: 12px;
+    line-height: 14px;
+  }
+}
