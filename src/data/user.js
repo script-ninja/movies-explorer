@@ -3,5 +3,5 @@ export default {
   _id: 'виталя',
   name: 'Виталя',
   email: 'pochta@yandex.ru',
-  authorized: true,
+  authorized: false,
 };

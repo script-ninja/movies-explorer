@@ -1,7 +1,11 @@
+import './App.css';
 import React from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
-import './App.css';
+
+// contexts
 import CurrentUserContext from '../../contexts/CurrentUser';
+
+// components
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Landing from '../Landing/Landing';
@@ -12,23 +16,51 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Page404 from '../Page404/Page404';
 
-// fake data
-import user from '../../data/user';
+// api
+import api from '../../utils/api';
 
 export default function App() {
   const browserHistory = useHistory();
-  const [currentUser, setCurrentUser] = React.useState(user);
+  const [currentUser, setCurrentUser] = React.useState({});
 
+  // авторизация
+  function login(credentials) {
+    api.authorize(credentials)
+      .then(({ token }) => {
+        localStorage.setItem('token', token);
+        return api.checkToken(token);
+      })
+      .then(user => {
+        setCurrentUser({ ...user, authorized: true });
+        browserHistory.push('/movies');
+      })
+      .catch(err => console.log(err));
+  }
+
+  // выход из аккаунта
   function logout() {
     setCurrentUser({ authorized: false });
+    localStorage.removeItem('token');
     browserHistory.push('/');
   }
+
+  // проверка токена при монитровании App
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      api.checkToken(token)
+        .then(user => {
+          setCurrentUser({ ...user, authorized: true });
+        })
+        .catch(err => console.log(err));
+    }
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
         <Route path='/signin'>
-          <Login />
+          <Login onLogin={login} />
         </Route>
         <Route path='/signup'>
           <Register />
