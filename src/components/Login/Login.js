@@ -25,9 +25,9 @@ export default function Login({ onLogin }) {
     <Main className='login'>
       <Logo />
       <h2 className='login__title'>Рады видеть!</h2>
-      <form className='login__form' onSubmit={ login }>
-        <FormInput onChange={onChange} name='email' label='E-mail' type='email' placeholder='Введите e-mail' required />
-        <FormInput onChange={onChange} name='password' label='Пароль' type='password' placeholder='Введите пароль' required />
+      <form name='login' className='login__form' onSubmit={ login }>
+        <FormInput onChange={onChange} name='email' label='E-mail' type='email' placeholder='Введите e-mail' required autoComplete='email' />
+        <FormInput onChange={onChange} name='password' label='Пароль' type='password' placeholder='Введите пароль' required autoComplete='current-password'/>
         <FormButton name='Войти' type='submit' />
       </form>
       <p className='login__text'>Ещё не зарегистрированы? <Link className='login__link' to='/signup'>Регистрация</Link></p>

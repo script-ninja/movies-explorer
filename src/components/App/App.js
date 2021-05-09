@@ -23,6 +23,16 @@ export default function App() {
   const browserHistory = useHistory();
   const [currentUser, setCurrentUser] = React.useState({});
 
+  // регистрация
+  function register(regData) {
+    api.register(regData)
+      .then(user => {
+        setCurrentUser({ ...user, authorized: true });
+        browserHistory.push('/movies');
+      })
+      .catch(err => console.log(err));
+  }
+
   // авторизация
   function login(credentials) {
     api.authorize(credentials)
@@ -33,6 +43,15 @@ export default function App() {
       .then(user => {
         setCurrentUser({ ...user, authorized: true });
         browserHistory.push('/movies');
+      })
+      .catch(err => console.log(err));
+  }
+
+  // обновление профиля
+  function updateProfile(data) {
+    api.updateProfile(data, localStorage.getItem('token'))
+      .then(user => {
+        setCurrentUser({ ...user, authorized: true });
       })
       .catch(err => console.log(err));
   }
@@ -63,7 +82,7 @@ export default function App() {
           <Login onLogin={login} />
         </Route>
         <Route path='/signup'>
-          <Register />
+          <Register onRegister={register} />
         </Route>
 
         <Route exact path='/'>
@@ -83,7 +102,7 @@ export default function App() {
         </Route>
         <Route path='/profile'>
           <Header />
-          <Profile onLogout={logout} />
+          <Profile onUpdate={updateProfile} onLogout={logout} />
         </Route>
         <Route path='*'>
           <Page404 />

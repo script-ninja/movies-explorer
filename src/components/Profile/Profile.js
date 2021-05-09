@@ -3,18 +3,23 @@ import React from 'react';
 import CurrentUserContext from '../../contexts/CurrentUser';
 import Main from '../Main/Main';
 
-export default function Profile({ onLogout }) {
+export default function Profile({ onUpdate, onLogout }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const [name, setName] = React.useState(currentUser.name);
   const [email, setEmail] = React.useState(currentUser.email);
 
-  function handleNameChange(event) {
+  function onNameChange(event) {
     setName(event.target.value);
   }
 
-  function handleEmailChange(event) {
+  function onEmailChange(event) {
     setEmail(event.target.value);
+  }
+
+  function onSubmit(event) {
+    event.preventDefault();
+    onUpdate({ name, email });
   }
 
   function onFocus(event) {
@@ -32,14 +37,15 @@ export default function Profile({ onLogout }) {
   return (
     <Main className='profile'>
       <h2 className='profile__caption'>Привет, {currentUser.name}!</h2>
-      <form className='profile__form' onFocus={onFocus} onBlur={onBlur}>
+      <form name='profile' className='profile__form' onSubmit={onSubmit} onFocus={onFocus} onBlur={onBlur}>
         <label className='profile__label profile__label_border-bottom_gray'>
           <p className='profile__label-text'>Имя</p>
           <input className='profile__input'
             type='text'
             value={name}
-            onChange={handleNameChange}
+            onChange={onNameChange}
             placeholder='Ваше имя'
+            autoComplete='username'
           />
         </label>
         <label className='profile__label'>
@@ -47,8 +53,9 @@ export default function Profile({ onLogout }) {
           <input className='profile__input'
             type='email'
             value={email}
-            onChange={handleEmailChange}
+            onChange={onEmailChange}
             placeholder='E-mail адрес'
+            autoComplete='email'
           />
         </label>
         <button className='profile__button profile__button_type_submit' type='submit'>Редактировать</button>
