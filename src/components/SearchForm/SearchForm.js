@@ -1,17 +1,25 @@
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
-export default function SearchForm() {
+export default function SearchForm({ onSubmit }) {
+  function submit(event) {
+    event.preventDefault();
+    onSubmit({
+      request: event.target.elements.request.elements.text.value,
+      short: event.target.elements.filters.elements.short.checked
+    });
+  }
+
   return (
-    <form className='search'>
-      <div className='search__field'>
+    <form name='search' className='search' onSubmit={submit}>
+      <fieldset name='request' className='search__field'>
         <label className='search__label' htmlFor='search-input'></label>
-        <input id='search-input' className='search__input' type='text' placeholder='Фильм' />
+        <input name='text' id='search-input' className='search__input' type='text' placeholder='Фильм' />
         <button className='search__button' type='submit'></button>
-      </div>
-      <div className='search__filters'>
-        <FilterCheckbox name='Короткометражки' />
-      </div>
+      </fieldset>
+      <fieldset name='filters' className='search__filters'>
+        <FilterCheckbox name='short' label='Короткометражки' />
+      </fieldset>
     </form>
   );
 }
