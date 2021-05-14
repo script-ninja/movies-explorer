@@ -8,13 +8,17 @@ import MovieCard from '../MovieCard/MovieCard';
 import MoreButton from '../MoreButton/MoreButton';
 import Preloader from '../Preloader/Preloader';
 
+// import CurrentUserContext from '../../contexts/CurrentUser';
+import api from '../../utils/api';
 import beatfilmApi from '../../utils/beatfilmAPI';
 
 export default function Movies() {
-  const [beatfilmMovies, setBeatfilmMovies] = React.useState(JSON.parse(localStorage.getItem('movies') || '[]'));
+  // const currentUser = React.useContext(CurrentUserContext);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [beatfilmMovies, setBeatfilmMovies] = React.useState(JSON.parse(localStorage.getItem('movies')) || []);
+  const [profileMovies, setProfileMovies] = React.useState([]);
 
-  function getMovies(filters) {
+  function searchMovies(filters) {
     setIsLoading(true);
     setBeatfilmMovies([]);
 
@@ -22,7 +26,7 @@ export default function Movies() {
       .then(movies => {
         const filteredMovies = movies.filter(movie => {
           return (
-            String(movie.nameRU + movie.nameEN + movie.description).toLowerCase().includes(filters.request.toLowerCase(), 0)
+            (movie.nameRU + movie.nameEN + movie.description).toLowerCase().includes(filters.request.toLowerCase(), 0)
             &&
             (filters.short ? movie.duration <= 40 : true)
           );
@@ -34,17 +38,27 @@ export default function Movies() {
       .finally(() => setIsLoading(false));
   }
 
+  React.useEffect(() => {
+    api.getMovies()
+      .then(movies => setProfileMovies(movies))
+      .catch(err => console.log(err));
+  }, []);
+
   return (
     <Main className='main_sideindent_big'>
-      <SearchForm onSubmit={getMovies} />
+      <SearchForm onSubmit={searchMovies} />
       <MovieCardsList>
         {
           (isLoading)
             ? <Preloader />
             :
               (beatfilmMovies.length)
-                ? beatfilmMovies.map(movie => (<MovieCard key={movie.id} movie={movie} />))
-                : <h2 className='movies-message'>Фильмов не найдено</h2>
+                ?
+                  beatfilmMovies.map(movie => {
+                    const profileMovie = profileMovies.find(profileMovie => profileMovie.movieId === movie.id);
+                    return (<MovieCard key={(profileMovie && profileMovie._id) || movie.id} movie={profileMovie || movie} />)
+                  })
+                : <p className='movies-message'>Фильмов не найдено</p>
         }
       </MovieCardsList>
       {

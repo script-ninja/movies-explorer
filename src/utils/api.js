@@ -50,7 +50,9 @@ class API {
       .then(res => this._parseResponse(res));
   }
 
-  updateProfile({ name, email }, token) {
+  updateProfile({ name, email }) {
+    const token = localStorage.getItem('token');
+
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -61,6 +63,46 @@ class API {
         name,
         email
       })
+    })
+    .then(res => this._parseResponse(res));
+  }
+
+  getMovies() {
+    const token = localStorage.getItem('token');
+
+    return fetch(`${this._url}/movies`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `Bearer ${token}`
+      }
+    })
+    .then(res => this._parseResponse(res));
+  }
+
+  saveMovie(movie) {
+    const token = localStorage.getItem('token');
+
+    return fetch(`${this._url}/movies`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(movie)
+    })
+    .then(res => this._parseResponse(res));
+  }
+
+  deleteMovie(id) {
+    const token = localStorage.getItem('token');
+
+    return fetch(`${this._url}/movies/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `Bearer ${token}`
+      }
     })
     .then(res => this._parseResponse(res));
   }

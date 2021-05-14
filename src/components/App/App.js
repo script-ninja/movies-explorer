@@ -49,7 +49,7 @@ export default function App() {
 
   // обновление профиля
   function updateProfile(data) {
-    api.updateProfile(data, localStorage.getItem('token'))
+    api.updateProfile(data)
       .then(user => {
         setCurrentUser({ ...user, authorized: true });
       })
@@ -63,15 +63,21 @@ export default function App() {
     browserHistory.push('/');
   }
 
-  // проверка токена при монитровании App
+  // проверка токена при монитровании App и загрузка фильмов из профиля
   React.useEffect(() => {
     const token = localStorage.getItem('token');
+
     if (token) {
       api.checkToken(token)
         .then(user => {
           setCurrentUser({ ...user, authorized: true });
+          // return api.getMovies();
         })
-        .catch(err => console.log(err));
+        // .then(movies => localStorage.setItem('savedMovies', JSON.stringify(movies)))
+        .catch(err => {
+          console.log(err)
+          // localStorage.removeItem('savedMovies');
+        });
     }
   }, []);
 

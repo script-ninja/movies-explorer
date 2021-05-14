@@ -85,6 +85,7 @@
 }
 
 .moviecard__savebutton {
+  z-index: 1;
   position: absolute;
   top: 14px;
   right: 14px;
@@ -107,12 +108,12 @@
   transition: all 0.1s linear;
 }
 
-.moviecard__savebutton:focus,
 .moviecard:hover .moviecard__savebutton {
   opacity: 1;
 }
 
 .moviecard__deletebutton {
+  z-index: 1;
   position: absolute;
   top: 14px;
   right: 14px;
@@ -143,7 +144,6 @@
   background-image: url('../../images/moviecard-added.svg');
 }
 
-.moviecard__deletebutton:focus,
 .moviecard:hover .moviecard__deletebutton {
   opacity: 1;
   background-color: #313131;

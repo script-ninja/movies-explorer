@@ -14,7 +14,7 @@ export default function SearchForm({ onSubmit }) {
     <form name='search' className='search' onSubmit={submit}>
       <fieldset name='request' className='search__field'>
         <label className='search__label' htmlFor='search-input'></label>
-        <input name='text' id='search-input' className='search__input' type='text' placeholder='Фильм' />
+        <input name='text' id='search-input' className='search__input' type='text' placeholder='Фильм' required minLength='2' />
         <button className='search__button' type='submit'></button>
       </fieldset>
       <fieldset name='filters' className='search__filters'>

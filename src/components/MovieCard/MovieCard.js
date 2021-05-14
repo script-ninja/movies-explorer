@@ -4,9 +4,23 @@ import CurrentUserContext from '../../contexts/CurrentUser';
 import preview from '../../images/preview.jpg';
 
 import { BASE_URL } from '../../utils/constants';
+import api from '../../utils/api';
 
-export default function MovieCard({ movie, hiddenDeleteButton }) {
+export default function MovieCard({ movie, onDelete, hiddenDeleteButton }) {
   const currentUser = React.useContext(CurrentUserContext);
+  const [currentMovie, setCurrentMovie] = React.useState(movie.owner ? movie : {
+    country: movie.country || 'No country',
+    director: movie.director || 'No director',
+    duration: movie.duration || 0,
+    year: movie.year || 'No year',
+    description: movie.description || 'No description',
+    image: (typeof(movie.image) === String && movie.image) || `${movie.image && movie.image.url ? BASE_URL + movie.image.url : preview}`,
+    trailer: movie.trailer || movie.trailerLink || 'https://youtube.com',
+    thumbnail: movie.thumbnail || `${movie.image && movie.image.formats && movie.image.formats.thumbnail && movie.image.formats.thumbnail ? BASE_URL + movie.image.formats.thumbnail.url : preview}`,
+    movieId: movie.movieId || movie.id || null,
+    nameRU: movie.nameRU || 'Без названия',
+    nameEN: movie.nameEN || 'No title'
+  });
 
   function toString(duration) {
     const hours = (duration - duration % 60) / 60;
@@ -17,19 +31,42 @@ export default function MovieCard({ movie, hiddenDeleteButton }) {
     return result;
   }
 
+  function saveMovie(event) {
+    event.target.disabled = true;
+
+    return api.saveMovie(currentMovie)
+      .then(movie => setCurrentMovie(movie))
+      .catch(err => console.log(err))
+      .finally(() => event.target.disabled = false);
+  }
+
+  function deleteMovie(event) {
+    event.target.disabled = true;
+
+    (onDelete
+      ?
+        onDelete(currentMovie._id)
+      :
+        api.deleteMovie(currentMovie._id)
+          .then(deletedMovie => setCurrentMovie({ ...deletedMovie, owner: undefined, _id: undefined  }))
+    )
+    .catch(err => console.log(err))
+    .finally(() => event.target.disabled = false);
+  }
+
   return (
     <figure className='moviecard'>
-      <a className='moviecard__link' href={ movie.trailerLink || 'https://youtube.com' } target='_blank' rel="noreferrer">
-        <img className='moviecard__image' src={ movie.image && movie.image.url ? `${BASE_URL + movie.image.url}` : preview } alt={ movie.nameRU }/>
+      <a className='moviecard__link' href={ currentMovie.trailer } target='_blank' rel="noreferrer">
+        <img className='moviecard__image' src={ currentMovie.image } alt={ currentMovie.nameRU }/>
       </a>
       <figcaption className='moviecard__caption'>
-        <h2 className='moviecard__title' title={ movie.nameRU }>{ movie.nameRU }</h2>
-        <p className='moviecard__duration'>{ toString(movie.duration) }</p>
+        <h2 className='moviecard__title' title={ currentMovie.nameRU }>{ currentMovie.nameRU }</h2>
+        <p className='moviecard__duration'>{ toString(currentMovie.duration) }</p>
       </figcaption>
       {
-        (movie.owner === currentUser._id)
-          ? <button className={`moviecard__deletebutton ${hiddenDeleteButton ? 'moviecard__deletebutton_hidden' : 'moviecard__deletebutton_checked'}`} type='button'></button>
-          : <button className='moviecard__savebutton' type='button'>Сохранить</button>
+        (currentMovie.owner === currentUser._id)
+          ? <button onClick={deleteMovie} className={`moviecard__deletebutton ${hiddenDeleteButton ? 'moviecard__deletebutton_hidden' : 'moviecard__deletebutton_checked'}`} type='button'></button>
+          : <button onClick={saveMovie} className='moviecard__savebutton' type='button'>Сохранить</button>
       }
     </figure>
   );
