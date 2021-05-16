@@ -23,7 +23,7 @@ export default function Movies() {
     setIsLoading(true);
     setFilteredMovies([]);
 
-    beatfilmApi.getMovies()
+    return beatfilmApi.getMovies()
       .then(movies => {
         const requestedMovies = filter(movies, { request: filters.request });
         const filteredMovies = filter(requestedMovies, { short: filters.short });
@@ -46,19 +46,17 @@ export default function Movies() {
       ? filter(movies, { short: true })
       : movies;
 
+    if (filteredMovies.length <= 0) setStatusMessage('Ничего не найдено');
     setFilteredMovies(filteredMovies);
     localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
-    if (filteredMovies.length <= 0) setStatusMessage('Ничего не найдено');
   }
 
   function showMore() {
-    if (displayedMovies.length < filteredMovies.length) {
-      if (document.documentElement.clientWidth > 1056) {
-        setDisplayedMovies(filteredMovies.slice(0, displayedMovies.length + 3));
-      }
-      else {
-        setDisplayedMovies(filteredMovies.slice(0, displayedMovies.length + 2));
-      }
+    if (document.documentElement.clientWidth > 1056) {
+      setDisplayedMovies(filteredMovies.slice(0, displayedMovies.length + 3));
+    }
+    else {
+      setDisplayedMovies(filteredMovies.slice(0, displayedMovies.length + 2));
     }
   }
 
