@@ -28,6 +28,10 @@ export default function App() {
     api.register(regData)
       .then(user => {
         setCurrentUser({ ...user, authorized: true });
+        return api.authorize({ email: regData.email, password: regData.password });
+      })
+      .then(({ token }) => {
+        localStorage.setItem('token', token);
         browserHistory.push('/movies');
       })
       .catch(err => console.log(err));

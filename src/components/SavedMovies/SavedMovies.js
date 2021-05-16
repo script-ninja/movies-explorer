@@ -59,7 +59,7 @@ export default function SavedMovies() {
         localStorage.setItem('profileFilteredMovies', JSON.stringify(movies));
       })
       .catch(err => {
-        // console.log(err);
+        console.log(err);
         setStatusMessage(err);
       })
       .finally(() => setIsLoading(false));
