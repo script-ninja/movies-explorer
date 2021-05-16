@@ -37,7 +37,7 @@ export default function SavedMovies() {
   }
 
   function toggleShort(event) {
-    const movies = JSON.parse(localStorage.getItem('profileFilteredMovies'));
+    const movies = JSON.parse(localStorage.getItem('profileFilteredMovies')) || [];
     const filteredMovies = event.target.checked
       ? filter(movies, { short: true })
       : movies;
@@ -53,6 +53,7 @@ export default function SavedMovies() {
       .then(movies => {
         setSavedMovies(movies);
         setProfileFilteredMovies(movies);
+        localStorage.setItem('profileFilteredMovies', JSON.stringify(movies));
       })
       .catch(err => {
         console.log(err);
