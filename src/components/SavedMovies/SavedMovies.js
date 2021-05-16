@@ -20,6 +20,9 @@ export default function SavedMovies() {
       .then(deletedMovie => {
         setSavedMovies(savedMovies.filter(movie => movie._id !== deletedMovie._id));
         setProfileFilteredMovies(profileFilteredMovies.filter(movie => movie._id !== deletedMovie._id));
+
+        const prev = JSON.parse(localStorage.getItem('profileFilteredMovies')) || [];
+        localStorage.setItem('profileFilteredMovies', JSON.stringify(prev.filter(movie => movie._id !== deletedMovie._id)));
       })
       .catch(err => err);
   }
