@@ -59,7 +59,7 @@ export default function App() {
   // выход из аккаунта
   function logout() {
     setCurrentUser({ authorized: false });
-    localStorage.removeItem('token');
+    localStorage.clear();
     browserHistory.push('/');
   }
 
