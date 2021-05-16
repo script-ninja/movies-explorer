@@ -1,7 +1,7 @@
 import './MoreButton.css';
 
-export default function MoreButton() {
+export default function MoreButton({ onClick }) {
   return (
-    <button className='morebutton morebutton_indent_big' type='button'>Ещё</button>
+    <button onClick={onClick} className='morebutton morebutton_indent_big' type='button'>Ещё</button>
   );
 }

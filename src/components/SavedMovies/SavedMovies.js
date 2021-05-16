@@ -29,7 +29,7 @@ export default function SavedMovies() {
 
   return (
     <Main className='main_sideindent_big'>
-      <SearchForm />
+      <SearchForm shortCheckboxName='profileCheckbox' />
       <MovieCardsList>
         {
           (isLoading)

@@ -1,12 +1,12 @@
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
-export default function SearchForm({ onSubmit }) {
+export default function SearchForm({ onSubmit, shortCheckboxName, onChangeShortFilter }) {
   function submit(event) {
     event.preventDefault();
     onSubmit({
       request: event.target.elements.request.elements.text.value,
-      short: event.target.elements.filters.elements.short.checked
+      short: event.target.elements.filters.elements[shortCheckboxName].checked
     });
   }
 
@@ -18,7 +18,7 @@ export default function SearchForm({ onSubmit }) {
         <button className='search__button' type='submit'></button>
       </fieldset>
       <fieldset name='filters' className='search__filters'>
-        <FilterCheckbox name='short' label='Короткометражки' />
+        <FilterCheckbox name={shortCheckboxName} label='Короткометражки' onChange={onChangeShortFilter} />
       </fieldset>
     </form>
   );
