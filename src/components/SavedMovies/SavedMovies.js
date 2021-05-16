@@ -60,7 +60,7 @@ export default function SavedMovies() {
       })
       .catch(err => {
         console.log(err);
-        setStatusMessage('При загрузке фильмов произошла ошибка');
+        setStatusMessage(err);
       })
       .finally(() => setIsLoading(false));
   }, []);
