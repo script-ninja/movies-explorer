@@ -24,6 +24,7 @@ import api from '../../utils/api';
 export default function App() {
   const browserHistory = useHistory();
   const [currentUser, setCurrentUser] = React.useState({});
+  const [isLoading, setIsLoading] = React.useState(true);
 
   // регистрация
   function register(regData) {
@@ -80,53 +81,53 @@ export default function App() {
         })
         .catch(err => {
           console.log(err);
-        });
+        })
+        .finally(() => setIsLoading(false));
     }
+    else setIsLoading(false);
   }, []);
 
   return (
+    isLoading
+    ? <Preloader />
+    :
     <CurrentUserContext.Provider value={currentUser}>
-      {
-        !currentUser.authorized
-        ? <Preloader />
-        :
-          <Switch>
-            <Route exact path='/'>
-              <Header />
-              <Landing />
-              <Footer />
-            </Route>
-            <Route exact path='/signin'>
-              {
-                currentUser.authorized ? <Redirect to='/movies' /> : <Login onLogin={login} />
-              }
-            </Route>
-            <Route exact path='/signup'>
-              {
-                currentUser.authorized ? <Redirect to='/movies' /> : <Register onRegister={register} />
-              }
-            </Route>
+      <Switch>
+        <Route exact path='/'>
+          <Header />
+          <Landing />
+          <Footer />
+        </Route>
+        <Route exact path='/signin'>
+          {
+            currentUser.authorized ? <Redirect to='/movies' /> : <Login onLogin={login} />
+          }
+        </Route>
+        <Route exact path='/signup'>
+          {
+            currentUser.authorized ? <Redirect to='/movies' /> : <Register onRegister={register} />
+          }
+        </Route>
 
-            <ProtectedRoute exact path='/movies' authorized={currentUser.authorized}>
-              <Header />
-              <Movies />
-              <Footer />
-            </ProtectedRoute>
-            <ProtectedRoute exact path='/saved-movies' authorized={currentUser.authorized}>
-              <Header />
-              <SavedMovies />
-              <Footer />
-            </ProtectedRoute>
-            <ProtectedRoute exact path='/profile' authorized={currentUser.authorized}>
-              <Header />
-              <Profile onUpdate={updateProfile} onLogout={logout} />
-            </ProtectedRoute>
+        <ProtectedRoute exact path='/movies' authorized={currentUser.authorized}>
+          <Header />
+          <Movies />
+          <Footer />
+        </ProtectedRoute>
+        <ProtectedRoute exact path='/saved-movies' authorized={currentUser.authorized}>
+          <Header />
+          <SavedMovies />
+          <Footer />
+        </ProtectedRoute>
+        <ProtectedRoute exact path='/profile' authorized={currentUser.authorized}>
+          <Header />
+          <Profile onUpdate={updateProfile} onLogout={logout} />
+        </ProtectedRoute>
 
-            <Route path='/'>
-              <Page404 />
-            </Route>
-          </Switch>
-      }
+        <Route path='/'>
+          <Page404 />
+        </Route>
+      </Switch>
     </CurrentUserContext.Provider>
   );
 }
