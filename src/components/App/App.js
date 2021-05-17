@@ -1,11 +1,12 @@
 import './App.css';
 import React from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import { Switch, Route, useHistory, Redirect } from 'react-router-dom';
 
 // contexts
 import CurrentUserContext from '../../contexts/CurrentUser';
 
 // components
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Landing from '../Landing/Landing';
@@ -85,32 +86,37 @@ export default function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
-        <Route path='/signin'>
-          <Login onLogin={login} />
-        </Route>
-        <Route path='/signup'>
-          <Register onRegister={register} />
-        </Route>
-
         <Route exact path='/'>
           <Header />
           <Landing />
           <Footer />
         </Route>
-        <Route path='/movies'>
+        <Route path='/signin'>
+          {
+            currentUser.authorized ? <Redirect to='/' /> : <Login onLogin={login} />
+          }
+        </Route>
+        <Route path='/signup'>
+          {
+            currentUser.authorized ? <Redirect to='/' /> : <Register onRegister={register} />
+          }
+        </Route>
+
+        <ProtectedRoute path='/movies' authorized={currentUser.authorized}>
           <Header />
           <Movies />
           <Footer />
-        </Route>
-        <Route path='/saved-movies'>
+        </ProtectedRoute>
+        <ProtectedRoute path='/saved-movies' authorized={currentUser.authorized}>
           <Header />
           <SavedMovies />
           <Footer />
-        </Route>
-        <Route path='/profile'>
+        </ProtectedRoute>
+        <ProtectedRoute path='/profile' authorized={currentUser.authorized}>
           <Header />
           <Profile onUpdate={updateProfile} onLogout={logout} />
-        </Route>
+        </ProtectedRoute>
+
         <Route path='*'>
           <Page404 />
         </Route>
