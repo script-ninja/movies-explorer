@@ -6,6 +6,7 @@ import { Switch, Route, useHistory, Redirect } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUser';
 
 // components
+import Preloader from '../Preloader/Preloader';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -85,42 +86,47 @@ export default function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Switch>
-        <Route exact path='/'>
-          <Header />
-          <Landing />
-          <Footer />
-        </Route>
-        <Route path='/signin'>
-          {
-            currentUser.authorized ? <Redirect to='/' /> : <Login onLogin={login} />
-          }
-        </Route>
-        <Route path='/signup'>
-          {
-            currentUser.authorized ? <Redirect to='/' /> : <Register onRegister={register} />
-          }
-        </Route>
+      {
+        !currentUser.authorized
+        ? <Preloader />
+        :
+          <Switch>
+            <Route exact path='/'>
+              <Header />
+              <Landing />
+              <Footer />
+            </Route>
+            <Route exact path='/signin'>
+              {
+                currentUser.authorized ? <Redirect to='/movies' /> : <Login onLogin={login} />
+              }
+            </Route>
+            <Route exact path='/signup'>
+              {
+                currentUser.authorized ? <Redirect to='/movies' /> : <Register onRegister={register} />
+              }
+            </Route>
 
-        <ProtectedRoute path='/movies' authorized={currentUser.authorized}>
-          <Header />
-          <Movies />
-          <Footer />
-        </ProtectedRoute>
-        <ProtectedRoute path='/saved-movies' authorized={currentUser.authorized}>
-          <Header />
-          <SavedMovies />
-          <Footer />
-        </ProtectedRoute>
-        <ProtectedRoute path='/profile' authorized={currentUser.authorized}>
-          <Header />
-          <Profile onUpdate={updateProfile} onLogout={logout} />
-        </ProtectedRoute>
+            <ProtectedRoute exact path='/movies' authorized={currentUser.authorized}>
+              <Header />
+              <Movies />
+              <Footer />
+            </ProtectedRoute>
+            <ProtectedRoute exact path='/saved-movies' authorized={currentUser.authorized}>
+              <Header />
+              <SavedMovies />
+              <Footer />
+            </ProtectedRoute>
+            <ProtectedRoute exact path='/profile' authorized={currentUser.authorized}>
+              <Header />
+              <Profile onUpdate={updateProfile} onLogout={logout} />
+            </ProtectedRoute>
 
-        <Route path='*'>
-          <Page404 />
-        </Route>
-      </Switch>
+            <Route path='/'>
+              <Page404 />
+            </Route>
+          </Switch>
+      }
     </CurrentUserContext.Provider>
   );
 }
