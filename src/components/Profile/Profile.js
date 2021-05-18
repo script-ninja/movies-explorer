@@ -3,6 +3,8 @@ import React from 'react';
 import CurrentUserContext from '../../contexts/CurrentUser';
 import Main from '../Main/Main';
 
+import FormValidator from '../../utils/FormValidator';
+
 export default function Profile({ onUpdate, onLogout }) {
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -19,7 +21,23 @@ export default function Profile({ onUpdate, onLogout }) {
 
   function onSubmit(event) {
     event.preventDefault();
-    onUpdate({ name, email });
+    const messageElement = document.forms.profile.querySelector('.profile__message');
+    const submitButton = event.target.querySelector('.profile__button_type_submit');
+    submitButton.classList.add('profile__button_disabled');
+    submitButton.disabled = true;
+
+    onUpdate({ name, email })
+    .then(message => {
+      messageElement.classList.add('profile__message_type_success');
+      messageElement.textContent = message;
+      setTimeout(() => {
+        messageElement.classList.remove('profile__message_type_success');
+        messageElement.textContent = '';
+      }, 1500);
+    })
+    .catch(err => {
+      messageElement.textContent = err;
+    });
   }
 
   function onFocus(event) {
@@ -34,6 +52,18 @@ export default function Profile({ onUpdate, onLogout }) {
       .classList.remove('profile__label_border-bottom_green');
   }
 
+  React.useEffect(() => {
+    const validator = new FormValidator({
+      inputSelector: '.profile__input',
+      invalidInputClass: 'profile__input_invalid',
+      submitSelector: '.profile__button_type_submit',
+      submitDisabledClass: 'profile__button_disabled',
+      errorMessageSelector: '.profile__message'
+    }, document.forms.profile);
+
+    validator.enable();
+  }, []);
+
   return (
     <Main className='profile'>
       <h2 className='profile__caption'>Привет, {currentUser.name}!</h2>
@@ -46,19 +76,22 @@ export default function Profile({ onUpdate, onLogout }) {
             onChange={onNameChange}
             placeholder='Ваше имя'
             autoComplete='username'
+            minLength='2' maxLength='30' required
           />
         </label>
         <label className='profile__label'>
-        <p className='profile__label-text'>E-mail</p>
+          <p className='profile__label-text'>E-mail</p>
           <input className='profile__input'
             type='email'
             value={email}
             onChange={onEmailChange}
             placeholder='E-mail адрес'
             autoComplete='email'
+            required
           />
         </label>
-        <button className='profile__button profile__button_type_submit' type='submit'>Редактировать</button>
+        <p name='profileMessage' className='profile__message'></p>
+        <button name='profileSubmitButton' className='profile__button profile__button_type_submit' type='submit'>Редактировать</button>
       </form>
       <button className='profile__button profile__button_type_signout'
         onClick={onLogout} type='button'>

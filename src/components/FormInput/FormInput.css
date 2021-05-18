@@ -35,3 +35,7 @@
 .forminput__field:focus {
   border-color: #3DDC84;
 }
+
+.forminput__field_invalid {
+  border-color: #EE3465;
+}

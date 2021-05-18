@@ -28,7 +28,7 @@ export default function App() {
 
   // регистрация
   function register(regData) {
-    api.register(regData)
+    return api.register(regData)
       .then(user => {
         setCurrentUser({ ...user, authorized: true });
         return api.authorize({ email: regData.email, password: regData.password });
@@ -37,12 +37,15 @@ export default function App() {
         localStorage.setItem('token', token);
         browserHistory.push('/movies');
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        return Promise.reject(err);
+      });
   }
 
   // авторизация
   function login(credentials) {
-    api.authorize(credentials)
+    return api.authorize(credentials)
       .then(({ token }) => {
         localStorage.setItem('token', token);
         return api.checkToken(token);
@@ -51,16 +54,23 @@ export default function App() {
         setCurrentUser({ ...user, authorized: true });
         browserHistory.push('/movies');
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        return Promise.reject(err);
+      });
   }
 
   // обновление профиля
   function updateProfile(data) {
-    api.updateProfile(data)
+    return api.updateProfile(data)
       .then(user => {
         setCurrentUser({ ...user, authorized: true });
+        return Promise.resolve('Информация профиля обновлена');
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        return Promise.reject(err);
+      });
   }
 
   // выход из аккаунта
