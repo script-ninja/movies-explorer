@@ -20,10 +20,19 @@ export default function Login({ onLogin }) {
 
   function login(event) {
     event.preventDefault();
+
+    const submitButton = event.target.querySelector('.formbutton');
+    submitButton.classList.add('formbutton_disabled');
+    submitButton.disabled = true;
+
     onLogin(credentials)
       .catch(err => {
         const message = document.forms.login.querySelector('.login__message');
         message.textContent = err;
+      })
+      .finally(() => {
+        submitButton.classList.remove('formbutton_disabled');
+        submitButton.disabled = false;
       });
   }
 

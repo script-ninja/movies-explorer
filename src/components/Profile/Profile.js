@@ -12,12 +12,26 @@ export default function Profile({ onUpdate, onLogout }) {
   const [name, setName] = React.useState(currentUser.name);
   const [email, setEmail] = React.useState(currentUser.email);
 
+  function sameData(name, email) {
+    return name === currentUser.name && email === currentUser.email;
+  }
+
   function onNameChange(event) {
     setName(event.target.value);
+    if (sameData(event.target.value, email)) {
+      const submitButton = document.forms.profile.querySelector('.profile__button_type_submit');
+      submitButton.classList.add('profile__button_disabled');
+      submitButton.disabled = true;
+    }
   }
 
   function onEmailChange(event) {
     setEmail(event.target.value);
+    if (sameData(name, event.target.value)) {
+      const submitButton = document.forms.profile.querySelector('.profile__button_type_submit');
+      submitButton.classList.add('profile__button_disabled');
+      submitButton.disabled = true;
+    }
   }
 
   function onSubmit(event) {

@@ -20,10 +20,19 @@ export default function Register({ onRegister }) {
 
   function register(event) {
     event.preventDefault();
+
+    const submitButton = event.target.querySelector('.formbutton');
+    submitButton.classList.add('formbutton_disabled');
+    submitButton.disabled = true;
+
     onRegister(credentials)
       .catch(err => {
         const message = document.forms.register.querySelector('.register__message');
         message.textContent = err;
+      })
+      .finally(() => {
+        submitButton.classList.remove('formbutton_disabled');
+        submitButton.disabled = false;
       });
   }
 

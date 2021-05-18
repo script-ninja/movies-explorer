@@ -25,7 +25,6 @@
 
 .formbutton_disabled {
   pointer-events: none;
-  background-color: #4285F4;
   color: #C2C2C2;
   opacity: 0.3;
 }
