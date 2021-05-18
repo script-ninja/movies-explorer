@@ -14,7 +14,7 @@ export default function MovieCard({ movie, onDelete, hiddenDeleteButton }) {
     duration: movie.duration || 0,
     year: movie.year || 'No year',
     description: movie.description || 'No description',
-    image: (typeof(movie.image) === String && movie.image) || `${movie.image && movie.image.url ? BASE_URL + movie.image.url : preview}`,
+    image: `${movie.image && movie.image.url ? BASE_URL + movie.image.url : preview}`,
     trailer: movie.trailer || movie.trailerLink || 'https://youtube.com',
     thumbnail: movie.thumbnail || `${movie.image && movie.image.formats && movie.image.formats.thumbnail && movie.image.formats.thumbnail ? BASE_URL + movie.image.formats.thumbnail.url : preview}`,
     movieId: movie.movieId || movie.id || null,
