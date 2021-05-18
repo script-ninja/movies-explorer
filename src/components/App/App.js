@@ -65,7 +65,6 @@ export default function App() {
     return api.updateProfile(data)
       .then(user => {
         setCurrentUser({ ...user, authorized: true });
-        return Promise.resolve('Информация профиля обновлена');
       })
       .catch(err => {
         console.log(err);

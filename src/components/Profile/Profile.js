@@ -4,6 +4,7 @@ import CurrentUserContext from '../../contexts/CurrentUser';
 import Main from '../Main/Main';
 
 import FormValidator from '../../utils/FormValidator';
+import { MESSAGES } from '../../utils/constants';
 
 export default function Profile({ onUpdate, onLogout }) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -27,17 +28,17 @@ export default function Profile({ onUpdate, onLogout }) {
     submitButton.disabled = true;
 
     onUpdate({ name, email })
-    .then(message => {
-      messageElement.classList.add('profile__message_type_success');
-      messageElement.textContent = message;
-      setTimeout(() => {
-        messageElement.classList.remove('profile__message_type_success');
-        messageElement.textContent = '';
-      }, 1500);
-    })
-    .catch(err => {
-      messageElement.textContent = err;
-    });
+      .then(() => {
+        messageElement.classList.add('profile__message_type_success');
+        messageElement.textContent = MESSAGES.PROFILE.UPDATED;
+        setTimeout(() => {
+          messageElement.classList.remove('profile__message_type_success');
+          messageElement.textContent = '';
+        }, 1500);
+      })
+      .catch(err => {
+        messageElement.textContent = err;
+      });
   }
 
   function onFocus(event) {
@@ -62,6 +63,7 @@ export default function Profile({ onUpdate, onLogout }) {
     }, document.forms.profile);
 
     validator.enable();
+    validator.clearStatus();
   }, []);
 
   return (
