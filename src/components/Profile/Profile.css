@@ -61,8 +61,26 @@
   outline: none;
 }
 
+.profile__input_invalid {
+  color: #EE3465;
+}
+
 .profile__label_border-bottom_green {
   border-bottom: 1px solid #3DDC84;
+}
+
+.profile__message {
+  margin: 0 0 15px;
+  height: 200px;
+
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+}
+
+.profile__message_type_success {
+  color: #3DDC84;
 }
 
 .profile__button {
@@ -80,8 +98,14 @@
   cursor: pointer;
 }
 
+.profile__button_disabled {
+  pointer-events: none;
+  color: #C2C2C2;
+  opacity: 0.2;
+}
+
 .profile__button_type_submit {
-  margin: 220px 0 16px;
+  margin: 0 0 16px;
 
   font-weight: 400;
   color: #ffffff;

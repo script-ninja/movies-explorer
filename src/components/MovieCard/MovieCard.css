@@ -8,9 +8,11 @@
 .moviecard__link {
   display: block;
   position: relative;
+  padding-top: 56.25%;
 }
 
 .moviecard__link::before {
+  z-index: 1;
   content: '';
   position: absolute;
   top: 0;
@@ -30,10 +32,14 @@
 }
 
 .moviecard__image {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: block;
-  width: 100%;
-  max-width: 100%;
+  max-width: 360px;
   max-height: 200px;
+  width: 100%;
+  height: 100%;
   border-radius: 6px;
   object-fit: cover;
 }
@@ -79,6 +85,7 @@
 }
 
 .moviecard__savebutton {
+  z-index: 1;
   position: absolute;
   top: 14px;
   right: 14px;
@@ -101,12 +108,12 @@
   transition: all 0.1s linear;
 }
 
-.moviecard__savebutton:focus,
 .moviecard:hover .moviecard__savebutton {
   opacity: 1;
 }
 
 .moviecard__deletebutton {
+  z-index: 1;
   position: absolute;
   top: 14px;
   right: 14px;
@@ -137,7 +144,6 @@
   background-image: url('../../images/moviecard-added.svg');
 }
 
-.moviecard__deletebutton:focus,
 .moviecard:hover .moviecard__deletebutton {
   opacity: 1;
   background-color: #313131;
